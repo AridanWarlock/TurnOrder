@@ -7,8 +7,6 @@ vector<player> List;
 vector<player> ::iterator List_iter;
 int x = 0;
 
-
-
 [STAThread]
 void main(cli::array<String^>^ args)
 {
