@@ -31,8 +31,8 @@ System::Void TurnOrder::TurnOrder::next_button_Click(System::Object^ sender, Sys
 
 System::Void TurnOrder::TurnOrder::TurnOrder_Load(System::Object^ sender, System::EventArgs^ e)
 {
-	player b("Ýëëè", 30, 40, 12, "Hero");
-	player a("Âàëüò", 10, 70, 20, "Hero");
+	player b("Элли", 30, 40, 12, "Hero");
+	player a("Вальт", 10, 70, 20, "Hero");
 
 	List.push_back(b);
 	List.push_back(a);
