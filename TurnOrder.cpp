@@ -20,7 +20,7 @@ System::Void TurnOrder::TurnOrder::next_button_Click(System::Object^ sender, Sys
 {
 	if (List.empty())
 	{
-		MessageBox::Show("Warning!", "Список пуст!");
+		MessageBox::Show("Warning!", "Г‘ГЇГЁГ±Г®ГЄ ГЇГіГ±ГІ!");
 		return;
 	}
 	x = (x == List.size() - 1) ? 0 : x + 1;
@@ -29,8 +29,8 @@ System::Void TurnOrder::TurnOrder::next_button_Click(System::Object^ sender, Sys
 
 System::Void TurnOrder::TurnOrder::TurnOrder_Load(System::Object^ sender, System::EventArgs^ e)
 {
-	player b("Элли", 30, 40, 12, "Hero");
-	player a("Вальт", 10, 70, 20, "Hero");
+	player b("Р­Р»Р»Рё", 30, 40, 12, "Hero");
+	player a("Р’Р°Р»СЊС‚", 10, 70, 20, "Hero");
 
 	List.push_back(b);
 	List.push_back(a);
@@ -51,7 +51,7 @@ System::Void TurnOrder::TurnOrder::TurnOrder_Load(System::Object^ sender, System
 System::Void TurnOrder::TurnOrder::add_button_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	if (add_name_text-> Text == "" || add_health_text->Text == "" || add_max_health_text->Text == "" || add_init_text->Text == "") {
-		MessageBox::Show("Warning!","Введите все поля!");
+		MessageBox::Show("Warning!","Г‚ГўГҐГ¤ГЁГІГҐ ГўГ±ГҐ ГЇГ®Г«Гї!");
 		return;
 	}
 
@@ -64,10 +64,9 @@ System::Void TurnOrder::TurnOrder::add_button_Click(System::Object^ sender, Syst
 		actor
 	);
 	
-	int Nikita = 139273;
 	for (int i = 0; i < List.size(); i++)
 		if (List[i] == Adding) {
-			MessageBox::Show("Такой герой уже присутствует!", "Warning!");
+			MessageBox::Show("Г’Г ГЄГ®Г© ГЈГҐГ°Г®Г© ГіГ¦ГҐ ГЇГ°ГЁГ±ГіГІГ±ГІГўГіГҐГІ!", "Warning!");
 			return;
 		}
 
