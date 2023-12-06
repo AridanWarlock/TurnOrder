@@ -412,7 +412,7 @@ namespace TurnOrder {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 20.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label1->Location = System::Drawing::Point(45, 27);
+			this->label1->Location = System::Drawing::Point(60, 27);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(66, 33);
 			this->label1->TabIndex = 4;

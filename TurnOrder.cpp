@@ -65,7 +65,8 @@ System::Void TurnOrder::TurnOrder::add_button_Click(System::Object^ sender, Syst
 		Convert::ToInt32(add_init_text->Text),
 		actor
 	);
-
+	
+	int Nikita = 139273;
 	for (int i = 0; i < List.size(); i++)
 		if (List[i] == Adding) {
 			MessageBox::Show("Такой герой уже присутствует!", "Warning!");
