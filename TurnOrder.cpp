@@ -1,4 +1,4 @@
-#include "TurnOrder.h"
+#include "Concentration.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -10,27 +10,36 @@ int x = 0;
 [STAThread]
 void main(cli::array<String^>^ args)
 {
+	setlocale(LC_ALL, "rus");
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	TurnOrder::TurnOrder form;
 	Application::Run(% form);
 }
 
+void TurnOrder::TurnOrder::concentration_check(bool check)
+{
+	List_iter->set_concentration(check);
+	if (List[x] == *List_iter)
+		conc_text->Visible = List_iter->get_concentration();
+}
+
 System::Void TurnOrder::TurnOrder::next_button_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	if (List.empty())
 	{
-		MessageBox::Show("Warning!", "Г‘ГЇГЁГ±Г®ГЄ ГЇГіГ±ГІ!");
+		MessageBox::Show("Warning!", "Список пуст!");
 		return;
 	}
 	x = (x == List.size() - 1) ? 0 : x + 1;
 	current_label->Text = marshal_as<String^>(List[x].get_name());
+	conc_text->Visible = (List[x].get_concentration()) ? true : false;
 }
 
 System::Void TurnOrder::TurnOrder::TurnOrder_Load(System::Object^ sender, System::EventArgs^ e)
 {
-	player b("Р­Р»Р»Рё", 30, 40, 12, "Hero");
-	player a("Р’Р°Р»СЊС‚", 10, 70, 20, "Hero");
+	player b("Ell", 30, 40, 12, "Hero");
+	player a("Elle", 10, 70, 20, "Hero");
 
 	List.push_back(b);
 	List.push_back(a);
@@ -51,7 +60,7 @@ System::Void TurnOrder::TurnOrder::TurnOrder_Load(System::Object^ sender, System
 System::Void TurnOrder::TurnOrder::add_button_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	if (add_name_text-> Text == "" || add_health_text->Text == "" || add_max_health_text->Text == "" || add_init_text->Text == "") {
-		MessageBox::Show("Warning!","Г‚ГўГҐГ¤ГЁГІГҐ ГўГ±ГҐ ГЇГ®Г«Гї!");
+		MessageBox::Show("Введите данные!", "Warning!");
 		return;
 	}
 
@@ -66,7 +75,7 @@ System::Void TurnOrder::TurnOrder::add_button_Click(System::Object^ sender, Syst
 	
 	for (int i = 0; i < List.size(); i++)
 		if (List[i] == Adding) {
-			MessageBox::Show("Г’Г ГЄГ®Г© ГЈГҐГ°Г®Г© ГіГ¦ГҐ ГЇГ°ГЁГ±ГіГІГ±ГІГўГіГҐГІ!", "Warning!");
+			MessageBox::Show("Такой герой уже есть!", "Warning!");
 			return;
 		}
 
@@ -108,6 +117,21 @@ System::Void TurnOrder::TurnOrder::damage_button_Click(System::Object^ sender, S
 		remove(List, List_iter, damage_comboBox, init_change_comboBox, name_comboBox);
 		relocate(List.size(), -27);
 	}
-
+	else if (Convert::ToInt32(damage_text->Text) > 0 && List_iter->get_concentration())
+	{
+		int damage_check = (Convert::ToInt32(damage_text->Text) > 20) ? Convert::ToInt32(damage_text->Text) / 2 : 10;
+		Concentration^ Conc_save = gcnew Concentration(this, damage_check, marshal_as<String^>(List_iter->get_name()));
+		Conc_save->Show();
+	}
+	else 
+	{
+		conc_text->Visible = List_iter->get_concentration();
+	}
 	display(List);
+}
+
+System::Void TurnOrder::TurnOrder::conc_button_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	List[x].set_concentration(!List[x].get_concentration());
+	conc_text->Visible = List[x].get_concentration();
 }

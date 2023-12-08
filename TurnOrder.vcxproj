@@ -123,16 +123,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Concentration.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="TurnOrder.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Concentration.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="player.h" />
     <ClInclude Include="TurnOrder.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Concentration.resx">
+      <DependentUpon>Concentration.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TurnOrder.resx">
       <DependentUpon>TurnOrder.h</DependentUpon>
     </EmbeddedResource>

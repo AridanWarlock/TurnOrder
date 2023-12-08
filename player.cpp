@@ -40,7 +40,10 @@ player::player(string _name, int _health, int _max_health, int _initiative, stri
 bool player::damage(int _damage)
 {
 	health = (health - _damage > max_health) ? max_health : health - _damage;
-	if (health <= 0 && actor == "Villain")
-		return true;
+	if (health <= 0) {
+		if (actor == "Villain")
+			return true;
+		concentration = false;
+	}
 	return false;
 }

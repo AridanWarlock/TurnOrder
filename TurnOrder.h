@@ -1,4 +1,5 @@
 #include "player.h"
+
 namespace TurnOrder {
 
 	using namespace System;
@@ -33,6 +34,9 @@ namespace TurnOrder {
 				delete components;
 			}
 		}
+	public: void concentration_check(bool check);
+
+
 	private: System::Windows::Forms::GroupBox^ list_groupBox;
 	protected:
 
@@ -96,6 +100,10 @@ namespace TurnOrder {
 	private: System::Windows::Forms::Label^ label14;
 	public:
 	public: System::Windows::Forms::TextBox^ health_text;
+
+	private: System::Windows::Forms::Label^ conc_text;
+	private: System::Windows::Forms::Button^ conc_button;
+	public:
 	private:
 
 
@@ -158,6 +166,8 @@ namespace TurnOrder {
 			this->damage_button = (gcnew System::Windows::Forms::Button());
 			this->damage_comboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->label13 = (gcnew System::Windows::Forms::Label());
+			this->conc_text = (gcnew System::Windows::Forms::Label());
+			this->conc_button = (gcnew System::Windows::Forms::Button());
 			this->list_groupBox->SuspendLayout();
 			this->drop_groupBox->SuspendLayout();
 			this->add_groupBox->SuspendLayout();
@@ -460,7 +470,7 @@ namespace TurnOrder {
 			// 
 			this->next_button->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->next_button->Location = System::Drawing::Point(518, 359);
+			this->next_button->Location = System::Drawing::Point(521, 374);
 			this->next_button->Name = L"next_button";
 			this->next_button->Size = System::Drawing::Size(176, 38);
 			this->next_button->TabIndex = 1;
@@ -474,7 +484,7 @@ namespace TurnOrder {
 			this->label4->BackColor = System::Drawing::SystemColors::ButtonShadow;
 			this->label4->Font = (gcnew System::Drawing::Font(L"MV Boli", 20.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->label4->Location = System::Drawing::Point(480, 163);
+			this->label4->Location = System::Drawing::Point(490, 169);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(238, 34);
 			this->label4->TabIndex = 2;
@@ -631,12 +641,39 @@ namespace TurnOrder {
 			this->label13->TabIndex = 4;
 			this->label13->Text = L"Имя";
 			// 
+			// conc_text
+			// 
+			this->conc_text->AutoSize = true;
+			this->conc_text->BackColor = System::Drawing::SystemColors::GradientInactiveCaption;
+			this->conc_text->Font = (gcnew System::Drawing::Font(L"Noto Serif Cond", 18, System::Drawing::FontStyle::Bold));
+			this->conc_text->ForeColor = System::Drawing::SystemColors::ControlText;
+			this->conc_text->Location = System::Drawing::Point(502, 325);
+			this->conc_text->Name = L"conc_text";
+			this->conc_text->Size = System::Drawing::Size(216, 33);
+			this->conc_text->TabIndex = 17;
+			this->conc_text->Text = L"Концентрируется";
+			this->conc_text->Visible = false;
+			// 
+			// conc_button
+			// 
+			this->conc_button->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->conc_button->Location = System::Drawing::Point(496, 113);
+			this->conc_button->Name = L"conc_button";
+			this->conc_button->Size = System::Drawing::Size(228, 33);
+			this->conc_button->TabIndex = 18;
+			this->conc_button->Text = L"Сконцентрироваться / Не";
+			this->conc_button->UseVisualStyleBackColor = true;
+			this->conc_button->Click += gcnew System::EventHandler(this, &TurnOrder::conc_button_Click);
+			// 
 			// TurnOrder
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveCaption;
 			this->ClientSize = System::Drawing::Size(1584, 861);
+			this->Controls->Add(this->conc_button);
+			this->Controls->Add(this->conc_text);
 			this->Controls->Add(this->groupBox5);
 			this->Controls->Add(this->groupBox4);
 			this->Controls->Add(this->current_label);
@@ -713,20 +750,6 @@ namespace TurnOrder {
 			}
 		}
 	}
-	bool empty_check(vector<player>& List, ComboBox^ name)
-	{
-		if (List.empty())
-		{
-			MessageBox::Show("Список пуст!", "Warning!");
-			return true;
-		}
-		if (name->Text == "")
-		{
-			MessageBox::Show("Герой не выбран!", "Warning!");
-			return true;
-		}
-		return false;
-	}
 	bool text_check(vector<player>& List, vector<player>::iterator& List_iter, ComboBox^ name)
 	{
 		if (List.empty())
@@ -741,9 +764,8 @@ namespace TurnOrder {
 		}
 
 		List_iter = List.begin();
-
-		for (; marshal_as<string>(name->Text) != List_iter->get_name() && List_iter != List.end(); List_iter++)
-			;
+		while (marshal_as<string>(name->Text) != List_iter->get_name() && List_iter != List.end())
+			List_iter ++;
 
 		if (List_iter == List.end()) {
 			MessageBox::Show("Э-т отсутствует!", "Warning!");
@@ -755,5 +777,6 @@ private: System::Void drop_button_Click(System::Object^ sender, System::EventArg
 private: System::Void init_change_button_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void damage_button_Click(System::Object^ sender, System::EventArgs^ e);
 
+private: System::Void conc_button_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

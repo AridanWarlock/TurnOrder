@@ -4,6 +4,8 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <iostream>
+
 
 using namespace std;
 using namespace msclr::interop;
@@ -16,6 +18,7 @@ private:
 	int max_health = 0; // Макс хиты
 	int initiative = 0; // Порядок инициативы
 	string actor; // Герой или Злодей
+	bool concentration = false; // Концентрируется?
 public:
 	player();
 	player(string _name, int _health, int _max_health, int _initiative, string _actor);
@@ -37,4 +40,10 @@ public:
 		initiative = _init;
 	}
 	bool damage(int _damage);
+	void set_concentration(bool alpha) {
+		concentration = alpha;
+	}
+	bool get_concentration() {
+		return concentration;
+	}
 };
