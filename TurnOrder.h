@@ -260,6 +260,7 @@ namespace TurnOrder {
 			// 
 			// name_comboBox
 			// 
+			this->name_comboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->name_comboBox->FormattingEnabled = true;
 			this->name_comboBox->ImeMode = System::Windows::Forms::ImeMode::NoControl;
 			this->name_comboBox->Location = System::Drawing::Point(61, 29);
@@ -444,6 +445,7 @@ namespace TurnOrder {
 			// 
 			// name_text
 			// 
+			this->name_text->Cursor = System::Windows::Forms::Cursors::Arrow;
 			this->name_text->Font = (gcnew System::Drawing::Font(L"MV Boli", 15.75F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->name_text->Location = System::Drawing::Point(6, 69);
@@ -552,6 +554,7 @@ namespace TurnOrder {
 			// 
 			// init_change_comboBox
 			// 
+			this->init_change_comboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->init_change_comboBox->FormattingEnabled = true;
 			this->init_change_comboBox->ImeMode = System::Windows::Forms::ImeMode::NoControl;
 			this->init_change_comboBox->Location = System::Drawing::Point(154, 30);
@@ -621,6 +624,7 @@ namespace TurnOrder {
 			// 
 			// damage_comboBox
 			// 
+			this->damage_comboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->damage_comboBox->FormattingEnabled = true;
 			this->damage_comboBox->ImeMode = System::Windows::Forms::ImeMode::NoControl;
 			this->damage_comboBox->Location = System::Drawing::Point(154, 30);

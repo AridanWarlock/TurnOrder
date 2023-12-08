@@ -123,10 +123,6 @@ System::Void TurnOrder::TurnOrder::damage_button_Click(System::Object^ sender, S
 		Concentration^ Conc_save = gcnew Concentration(this, damage_check, marshal_as<String^>(List_iter->get_name()));
 		Conc_save->Show();
 	}
-	else 
-	{
-		conc_text->Visible = List_iter->get_concentration();
-	}
 	display(List);
 }
 
