@@ -8,6 +8,7 @@ namespace TurnOrder {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
 
 	/// <summary>
 	/// Сводка для TurnOrder
@@ -18,11 +19,11 @@ namespace TurnOrder {
 		TurnOrder(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: добавьте код конструктора
-			//
 		}
-
+	private:
+		List<player^>^ List_of_Characters = gcnew List<player^>();
+	private:
+		int index_of_character;
 	protected:
 		/// <summary>
 		/// Освободить все используемые ресурсы.
@@ -35,13 +36,14 @@ namespace TurnOrder {
 			}
 		}
 	public: void concentration_check(bool check);
+	public:
+		
 
 
-	private: System::Windows::Forms::GroupBox^ list_groupBox;
+	private: System::Windows::Forms::GroupBox^ List_of_Characters_groupBox;
 	protected:
 
 	public: System::Windows::Forms::Label^ _label1;
-	private:
 	protected:
 
 
@@ -127,7 +129,7 @@ namespace TurnOrder {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->list_groupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->List_of_Characters_groupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->_label2 = (gcnew System::Windows::Forms::Label());
 			this->label14 = (gcnew System::Windows::Forms::Label());
 			this->health_text = (gcnew System::Windows::Forms::TextBox());
@@ -168,33 +170,33 @@ namespace TurnOrder {
 			this->label13 = (gcnew System::Windows::Forms::Label());
 			this->conc_text = (gcnew System::Windows::Forms::Label());
 			this->conc_button = (gcnew System::Windows::Forms::Button());
-			this->list_groupBox->SuspendLayout();
+			this->List_of_Characters_groupBox->SuspendLayout();
 			this->drop_groupBox->SuspendLayout();
 			this->add_groupBox->SuspendLayout();
 			this->groupBox4->SuspendLayout();
 			this->groupBox5->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// list_groupBox
+			// List_of_Characters_groupBox
 			// 
-			this->list_groupBox->Controls->Add(this->_label2);
-			this->list_groupBox->Controls->Add(this->label14);
-			this->list_groupBox->Controls->Add(this->health_text);
-			this->list_groupBox->Controls->Add(this->drop_groupBox);
-			this->list_groupBox->Controls->Add(this->label3);
-			this->list_groupBox->Controls->Add(this->add_groupBox);
-			this->list_groupBox->Controls->Add(this->label1);
-			this->list_groupBox->Controls->Add(this->init_text);
-			this->list_groupBox->Controls->Add(this->name_text);
-			this->list_groupBox->Controls->Add(this->_label1);
-			this->list_groupBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+			this->List_of_Characters_groupBox->Controls->Add(this->_label2);
+			this->List_of_Characters_groupBox->Controls->Add(this->label14);
+			this->List_of_Characters_groupBox->Controls->Add(this->health_text);
+			this->List_of_Characters_groupBox->Controls->Add(this->drop_groupBox);
+			this->List_of_Characters_groupBox->Controls->Add(this->label3);
+			this->List_of_Characters_groupBox->Controls->Add(this->add_groupBox);
+			this->List_of_Characters_groupBox->Controls->Add(this->label1);
+			this->List_of_Characters_groupBox->Controls->Add(this->init_text);
+			this->List_of_Characters_groupBox->Controls->Add(this->name_text);
+			this->List_of_Characters_groupBox->Controls->Add(this->_label1);
+			this->List_of_Characters_groupBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->list_groupBox->Location = System::Drawing::Point(933, 12);
-			this->list_groupBox->Name = L"list_groupBox";
-			this->list_groupBox->Size = System::Drawing::Size(639, 588);
-			this->list_groupBox->TabIndex = 0;
-			this->list_groupBox->TabStop = false;
-			this->list_groupBox->Text = L"Список";
+			this->List_of_Characters_groupBox->Location = System::Drawing::Point(933, 12);
+			this->List_of_Characters_groupBox->Name = L"List_of_Characters_groupBox";
+			this->List_of_Characters_groupBox->Size = System::Drawing::Size(639, 588);
+			this->List_of_Characters_groupBox->TabIndex = 0;
+			this->List_of_Characters_groupBox->TabStop = false;
+			this->List_of_Characters_groupBox->Text = L"Список";
 			// 
 			// _label2
 			// 
@@ -683,12 +685,12 @@ namespace TurnOrder {
 			this->Controls->Add(this->current_label);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->next_button);
-			this->Controls->Add(this->list_groupBox);
+			this->Controls->Add(this->List_of_Characters_groupBox);
 			this->Name = L"TurnOrder";
 			this->Text = L"TurnOrder";
 			this->Load += gcnew System::EventHandler(this, &TurnOrder::TurnOrder_Load);
-			this->list_groupBox->ResumeLayout(false);
-			this->list_groupBox->PerformLayout();
+			this->List_of_Characters_groupBox->ResumeLayout(false);
+			this->List_of_Characters_groupBox->PerformLayout();
 			this->drop_groupBox->ResumeLayout(false);
 			this->drop_groupBox->PerformLayout();
 			this->add_groupBox->ResumeLayout(false);
@@ -706,12 +708,12 @@ namespace TurnOrder {
 	private: System::Void TurnOrder_Load(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void add_button_Click(System::Object^ sender, System::EventArgs^ e);
 	
-	const void display(vector<player>& List)
+	const void display()
 	{
 		name_text->Text = "";
 		init_text->Text = "";
 		health_text->Text = "";
-		for (int i = 0; i < List.size(); i++)
+		for (int i = 0; i < List_of_Characters->Count; i++)
 		{
 			if (i)
 			{
@@ -719,44 +721,54 @@ namespace TurnOrder {
 				name_text->Text += "\r\n";
 				init_text->Text += "\r\n";
 			}
-			health_text->Text += Convert::ToString(List[i].get_health()) + " / " + Convert::ToString(List[i].get_max_health());
-			name_text->Text += marshal_as<String^>(List[i].get_name());
-			init_text->Text += Convert::ToString(List[i].get_initiative());
+			health_text->Text += Convert::ToString(List_of_Characters[i]->get_health()) + " / " + Convert::ToString(List_of_Characters[i]->get_max_health());
+			name_text->Text += List_of_Characters[i]->get_name();
+			init_text->Text += Convert::ToString(List_of_Characters[i]->get_initiative());
 		}
 	}
-	void sorting(vector<player>& List)
+	void sorting()
 	{
-		sort(List.rbegin(), List.rend());
-		display(List);
+		for (int k = 0; k < List_of_Characters->Count - 1; k++) {
+			for (int i = 0; i < List_of_Characters->Count - k - 1; i++)
+			{
+				if (List_of_Characters[i] < List_of_Characters[i + 1])
+				{
+					player^ temp = gcnew player(List_of_Characters[i]);
+					List_of_Characters[i] = List_of_Characters[i + 1];
+					List_of_Characters[i+1] = temp;
+				}
+			}
+		}
+		display();
 	}
-	void remove(vector<player>& List, vector<player>::iterator& List_iter, ComboBox^ one, ComboBox^ another, ComboBox^ some)
+	void remove(int index_of_removed, ComboBox^ one, ComboBox^ another, ComboBox^ some)
 	{
-		List.erase(List_iter);
+		List_of_Characters->RemoveAt(index_of_removed);
 		another->Items->Remove(one->Text);
 		some->Items->Remove(one->Text);
 		one->Items->Remove(one->Text);
 	}
-	void relocate(int List_size, int move)
+	void relocate(int List_of_Characters_size, int move)
 	{
-		if (List_size > 4)
+		if (List_of_Characters_size > 4)
 		{
-			int add_move = (List_size % 2 == 1) ? 1 : 0;
+			int add_move = (List_of_Characters_size % 2 == 1) ? 1 : 0;
 			move = (move > 0) ? move + add_move : move - add_move;
 			name_text->Height += move;
 			init_text->Height += move;
 			health_text->Height += move;
 			_label1->Location = Point(_label1->Location.X, _label1->Location.Y + move / 2);
 			_label2->Location = Point(_label2->Location.X, _label2->Location.Y + move / 2);
-			if (List_size > 7) {
-				list_groupBox->Height += move;
+			if (List_of_Characters_size > 7) {
+				List_of_Characters_groupBox->Height += move;
 				add_groupBox->Location = Point(add_groupBox->Location.X, add_groupBox->Location.Y + move);
 				drop_groupBox->Location = Point(drop_groupBox->Location.X, drop_groupBox->Location.Y + move);
 			}
 		}
 	}
-	bool text_check(vector<player>& List, vector<player>::iterator& List_iter, ComboBox^ name)
+	bool text_check(ComboBox^ name)
 	{
-		if (List.empty())
+		if (List_of_Characters->Count == 0)
 		{
 			MessageBox::Show("Список пуст!", "Warning!");
 			return true;
@@ -766,13 +778,11 @@ namespace TurnOrder {
 			MessageBox::Show("Герой не выбран!", "Warning!");
 			return true;
 		}
-
-		List_iter = List.begin();
-		while (marshal_as<string>(name->Text) != List_iter->get_name() && List_iter != List.end())
-			List_iter ++;
-
-		if (List_iter == List.end()) {
-			MessageBox::Show("Э-т отсутствует!", "Warning!");
+		index_of_character = 0;
+		while (index_of_character < List_of_Characters->Count && List_of_Characters[index_of_character]->get_name() != name->Text)
+			index_of_character++;
+		if (index_of_character == List_of_Characters->Count) {
+			MessageBox::Show("ERROR! Ошибка логики!");
 			return true;
 		}
 		return false;

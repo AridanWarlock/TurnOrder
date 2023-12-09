@@ -1,31 +1,30 @@
 #include <stdlib.h>
 #include <string>
-#include <msclr\marshal_cppstd.h>
-#include <vector>
-#include <set>
+#include <list>
 #include <algorithm>
 #include <iostream>
 
 
 using namespace std;
-using namespace msclr::interop;
-
-class player
+using namespace System;
+public ref class player
 {
 private:
-	string name; // Имя бойца
+	System::String^ name; // Имя бойца
 	int health = 0; // Хиты
 	int max_health = 0; // Макс хиты
 	int initiative = 0; // Порядок инициативы
-	string actor; // Герой или Злодей
+	System::String^ actor; // Герой или Злодей
 	bool concentration = false; // Концентрируется?
 public:
 	player();
-	player(string _name, int _health, int _max_health, int _initiative, string _actor);
-	bool operator < (player& another);
-	bool operator == (player& another);
-	bool operator != (player& another);
-	string get_name() {return name;};
+	player(player^ another);
+	player(String^ _name, int _health, int _max_health, int _initiative, String^ _actor);
+	bool operator < (player^ another);
+	bool operator == (player^ another);
+	bool operator != (player^ another);
+	player^ operator= (player^ another);
+	String^ get_name() {return name;};
 	int get_initiative() {
 		return initiative;
 	}

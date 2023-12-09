@@ -1,24 +1,35 @@
 #include "player.h"
 
-bool player::operator < (player& another)
+bool player::operator < (player^ another)
 {
-	if (initiative < another.initiative)
+	if (initiative < another->initiative)
 		return true;
-	if (initiative == another.initiative && actor == "Villain")
-		return (actor != another.actor);
+	if (initiative == another->initiative && actor == "Villain")
+		return (actor != another->actor);
 	return false;
 }
 
-bool player::operator==(player& another)
+bool player::operator==(player^ another)
 {
-	if (name != another.name)
+	if (name != another->name)
 		return false;
 	return true;
 }
 
-bool player::operator!=(player& another)
+bool player::operator!=(player^ another)
 {
 	return !operator==(another);
+}
+
+player^ player::operator=(player^ another)
+{
+	name = another->name;
+	health = another->health;
+	initiative = another->initiative;
+	max_health = another->max_health;
+	actor = another->actor;
+	concentration = another->concentration;
+	return this;
 }
 
 player::player()
@@ -28,7 +39,18 @@ player::player()
 	initiative = 0;
 	actor = "Villain";
 }
-player::player(string _name, int _health, int _max_health, int _initiative, string _actor)
+
+player::player(player^ another)
+{
+	name = another->name;
+	health = another->health;
+	initiative = another->initiative;
+	max_health = another->max_health;
+	actor = another->actor;
+	concentration = another->concentration;
+}
+
+player::player(String^ _name, int _health, int _max_health, int _initiative, String^ _actor)
 {
 	name = _name;
 	health = _health;
